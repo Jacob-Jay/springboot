@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span th:if="${reader!=null}"  th:text="'name:'+${reader}"> </span>
+<h1>your read list</h1>
+<table style="border: 1px " >
+    <tr style="text-align: center;border-bottom-style: dashed;border: black">
+        <td>id</td>
+        <td>title</td>
+        <td>author</td>
+        <td>isbn</td>
+        <td>desc</td>
+    </tr>
+    <tr th:if="${bookList!=null}" th:each="book : ${bookList}" style="text-align: center;border-bottom-style: dashed;border: black">
+        <td th:text="${book.id}">id</td>
+        <td th:text="${book.title}">title</td>
+        <td th:text="${book.author}">author</td>
+        <td th:text="${book.isbn}">isbn</td>
+        <td th:text="${book.desc}">desc</td>
+    </tr>
+</table>
+
+<hr>
+<h1>add a book</h1>
+<form method="post" th:if="${reader!=null}" th:action="@{'/book/'+${reader}}">
+    <input type="hidden" th:value="${reader}">
+    title:<input th:type="text" name="title"><br>
+    author:<input th:type="text" name="author"><br>
+    isbn:<input th:type="text" name="isbn"><br>
+    desc:<textarea name="desc"></textarea><br>
+    <input type="submit" th:value="add">
+</form>
+</body>
+</html>
